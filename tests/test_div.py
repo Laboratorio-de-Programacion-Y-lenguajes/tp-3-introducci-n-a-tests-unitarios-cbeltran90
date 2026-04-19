@@ -22,3 +22,32 @@ def test_div_normal():
 # def test_div_por_cero():
 #     with pytest.raises(ZeroDivisionError):
 #         div(10, 0)
+
+def test_div_decimal():
+    assert div(7, 2) == 3.5
+    assert div(5, 4) == 1.25
+
+
+def test_div_negativos():
+    assert div(-6, 3) == -2.0
+    assert div(6, -3) == -2.0
+    assert div(-6, -3) == 2.0
+
+
+def test_div_por_cero():
+    with pytest.raises(ZeroDivisionError):
+        div(10, 0)
+    with pytest.raises(ZeroDivisionError):
+        div(-5, 0)
+
+
+@pytest.mark.parametrize("a,b,expected", [
+    (10, 2, 5.0),
+    (9, 4, 2.25),
+    (-10, 2, -5.0),
+    (10, -2, -5.0),
+    (-10, -2, 5.0),
+    (0, 5, 0.0),
+])
+def test_div_parametrizado(a, b, expected):
+    assert div(a, b) == pytest.approx(expected)
